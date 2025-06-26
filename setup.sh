@@ -40,10 +40,11 @@ if ! [ -f "$this_dir/cmssw/$CMSSW_VER/.installed" ]; then
     subsub_ver=`echo $CMSSW_VER | cut -d'_' -f 4`
     if [[ $master_ver == "14"  && $sub_ver == "0" ]]; then
       run_cmd echo "=> Installing addons for CMSSW_"${master_ver}"_"$sub_ver
-      run_cmd git cms-checkout-topic DAZSLE:CMSSW_14_0_6_BTVnano_GPT
-      # Extra tau models from Tau POG
+      run_cmd git cms-checkout-topic cosbyc:CMSSW_14_0_6_BTVnano_GPT_with_PAIReD
+      # Extra tau models from Tau POG and PAIReD
       run_cmd wget https://github.com/cms-tau-pog/RecoTauTag-TrainingFiles/raw/refs/heads/BoostedDeepTau_v2/BoostedDeepTauId/boosteddeepTau_RunIIv2p0_{core,inner,outer}.pb -P RecoTauTag/TrainingFiles/data/BoostedDeepTauId/
       run_cmd wget https://github.com/cms-tau-pog/RecoTauTag-TrainingFiles/raw/refs/heads/deepTau_v2p5_noDomainAdaptation/DeepTauId/deepTau_2018v2p5_noDomainAdaptation_{core,inner,outer}.pb -P RecoTauTag/TrainingFiles/data/DeepTauId/
+      run_cmd wget https://github.com/tajrussell/cmssw/raw/refs/heads/PAIReD_C500/RecoBTag/Combined/data/PAIReD/{PAIReD_c500,model3}.onnx -P RecoBTag/Combined/data/PAIReD/
     fi
 
     # custom code
